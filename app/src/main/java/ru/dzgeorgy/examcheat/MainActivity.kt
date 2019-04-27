@@ -6,6 +6,7 @@ import android.support.wearable.activity.WearableActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.wear.widget.WearableLinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
@@ -50,7 +51,7 @@ class MainActivity : WearableActivity() {
     inner class Adapter(private val titles: List<String>) : RecyclerView.Adapter<Adapter.ViewHolder>() {
 
         inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-            val button = view.button
+            private val button: TextView = view.button
             fun bind(title: String, position: Int) {
                 button.text = title
                 button.setOnClickListener {
