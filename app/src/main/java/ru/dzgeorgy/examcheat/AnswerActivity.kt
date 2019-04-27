@@ -12,23 +12,9 @@ class AnswerActivity : WearableActivity() {
         setContentView(R.layout.activity_answer)
         val num = intent.getIntExtra("num", 0)
         image.setImageDrawable(findImage(num))
-//        scroll.apply {
-//            setOnGenericMotionListener { v, event ->
-//                if (event.action == MotionEvent.ACTION_SCROLL && RotaryEncoder.isFromRotaryEncoder(event)) {
-//                    val delta = -RotaryEncoder.getRotaryAxisValue(event) * RotaryEncoder.getScaledScrollFactor(this@AnswerActivity)
-//                    v.scrollBy(Math.round(delta), 0)
-//                    return@setOnGenericMotionListener true
-//                }
-//                false
-//            }
-//            requestFocus()
-//        }
-
         setAmbientEnabled()
     }
 
-    private fun findImage(num: Int): Drawable? {
-        return resources.getDrawable(resources.getIdentifier("screenshot_${num + 1}", "drawable", packageName))
-    }
+    private fun findImage(num: Int): Drawable? = resources.getDrawable(resources.getIdentifier("screenshot_${num + 1}", "drawable", packageName))
 
 }
