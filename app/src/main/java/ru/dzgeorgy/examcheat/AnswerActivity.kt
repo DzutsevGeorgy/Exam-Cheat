@@ -11,7 +11,13 @@ class AnswerActivity : WearableActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_answer)
         val num = intent.getIntExtra("num", 0)
-        image.setImageDrawable(findImage(num))
+        //image.setImageDrawable(findImage(num))
+        image.apply {
+            setImageDrawable(findImage(num))
+            minZoom = 2f
+            setZoom(2f, 0f, 0f)
+        }
+        println(image.maxZoom)
         setAmbientEnabled()
     }
 
