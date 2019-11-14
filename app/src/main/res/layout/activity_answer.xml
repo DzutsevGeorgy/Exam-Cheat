@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.wear.widget.BoxInsetLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:padding="@dimen/box_inset_layout_padding"
-tools:context=".AnswerActivity"
-tools:deviceIds="wear">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="@dimen/box_inset_layout_padding"
+    tools:context=".AnswerActivity"
+    app:boxedEdges="all"
+    tools:deviceIds="wear">
 
 <com.ortiz.touchview.TouchImageView
     android:id="@+id/image"

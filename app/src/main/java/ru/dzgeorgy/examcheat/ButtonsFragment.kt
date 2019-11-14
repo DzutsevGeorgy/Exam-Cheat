@@ -70,7 +70,7 @@ class ButtonsFragment : Fragment() {
                 button.text = title
                 button.setOnClickListener {
                     val intent = Intent(context!!, AnswerActivity::class.java)
-                    intent.putExtra("num", position)
+                    intent.putExtra("qst", position)
                     intent.putExtra("mode", mode)
                     startActivity(intent)
                 }

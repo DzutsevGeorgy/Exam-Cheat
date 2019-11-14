@@ -13,6 +13,8 @@ class AnswerActivity : WearableActivity() {
         val num = intent.getIntExtra("qst", 0)
         val mode = intent.getIntExtra("mode", 0)
         //image.setImageDrawable(findImage(num))
+        println("num=$num")
+        println("mofr=$mode")
         image.apply {
             setImageDrawable(findImage(num, mode))
             minZoom = 2f
