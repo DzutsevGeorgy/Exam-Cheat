@@ -47,4 +47,9 @@
         <item>40. Разложение функции arctgx в ряд Маклорена.</item>
         <item>41. Биноминальный ряд.</item>
     </string-array>
+
+    <string-array name="practice">
+        <item>tst btn</item>
+        <item>txt btn 2</item>
+    </string-array>
 </resources>

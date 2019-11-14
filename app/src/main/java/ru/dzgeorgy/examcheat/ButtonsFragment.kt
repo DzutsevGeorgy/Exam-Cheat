@@ -1,32 +1,48 @@
 package ru.dzgeorgy.examcheat
 
+import android.app.Fragment
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.wear.widget.WearableLinearLayoutManager
 import kotlinx.android.synthetic.main.button.view.*
-import kotlinx.android.synthetic.main.button_fragment.view.*
+import kotlinx.android.synthetic.main.buttons_fragment.view.*
 import kotlin.math.abs
 import kotlin.math.min
 
-class ButtonsFragment: Fragment() {
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.button_fragment, container, false)
+const val MAX_ICON_PROGRESS = 0.65f
+
+class ButtonsFragment : Fragment() {
+    private var mode = 0
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mode = arguments.getInt("info", 0)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val view = inflater.inflate(R.layout.buttons_fragment, container, false)
         view.buttons.apply {
             isEdgeItemsCenteringEnabled = true
             layoutManager = WearableLinearLayoutManager(context!!, CustomScrollingLayoutCallback())
-            adapter = Adapter(resources.getStringArray(R.array.questions).toList())
+            if (mode == 0)
+                adapter = Adapter(resources.getStringArray(R.array.questions).toList())
+            else
+                adapter = Adapter(resources.getStringArray(R.array.practice).toList())
             requestFocus()
         }
 
         return view
     }
-
 
     inner class CustomScrollingLayoutCallback : WearableLinearLayoutManager.LayoutCallback() {
 
@@ -45,7 +61,8 @@ class ButtonsFragment: Fragment() {
 
     }
 
-    inner class Adapter(private val titles: List<String>) : RecyclerView.Adapter<Adapter.ViewHolder>() {
+    inner class Adapter(private val titles: List<String>) :
+        RecyclerView.Adapter<Adapter.ViewHolder>() {
 
         inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             private val button: TextView = view.button
@@ -54,6 +71,7 @@ class ButtonsFragment: Fragment() {
                 button.setOnClickListener {
                     val intent = Intent(context!!, AnswerActivity::class.java)
                     intent.putExtra("num", position)
+                    intent.putExtra("mode", mode)
                     startActivity(intent)
                 }
             }

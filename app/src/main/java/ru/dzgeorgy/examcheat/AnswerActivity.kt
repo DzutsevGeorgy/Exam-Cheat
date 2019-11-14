@@ -10,10 +10,11 @@ class AnswerActivity : WearableActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_answer)
-        val num = intent.getIntExtra("num", 0)
+        val num = intent.getIntExtra("qst", 0)
+        val mode = intent.getIntExtra("mode", 0)
         //image.setImageDrawable(findImage(num))
         image.apply {
-            setImageDrawable(findImage(num))
+            setImageDrawable(findImage(num, mode))
             minZoom = 2f
             setZoom(2f, 0f, 0f)
         }
@@ -21,6 +22,28 @@ class AnswerActivity : WearableActivity() {
         setAmbientEnabled()
     }
 
-    private fun findImage(num: Int): Drawable? = resources.getDrawable(resources.getIdentifier("screenshot_${num + 1}", "drawable", packageName))
+    private fun findImage(num: Int, mode: Int): Drawable? {
+        if (mode == 0)
+            return applicationContext.getDrawable(
+                resources.getIdentifier(
+                    "screenshot_${num + 1}",
+                    "drawable",
+                    packageName
+                )
+            )
+        else
+            return applicationContext.getDrawable(
+                resources.getIdentifier(
+                    "screenshot_practice_${num + 1}",
+                    "drawable",
+                    packageName
+                )
+            )
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        fragmentManager!!.popBackStackImmediate()
+    }
 
 }
